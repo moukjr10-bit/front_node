@@ -1,97 +1,107 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify';
-const URL_FRONT = import.meta.env.VITE_URL_FRONT;
+return (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-purple-100 px-4">
 
+    <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8">
 
-const Connexion = () => {
-  const [ email , setEmail ] = useState('');
-  const [ password , setPassword ] = useState('');
-  const navigate = useNavigate();
+      <h1 className="text-4xl font-bold text-center mb-2 text-gray-800">
+        Connexion
+      </h1>
 
-  const Laconnexion = async (e)  => {
-       e.preventDefault();
+      <p className="text-center text-gray-500 mb-8">
+        Connectez-vous à votre compte
+      </p>
 
+      <form onSubmit={Laconnexion} className="space-y-5">
 
-        if (!email || !password) {
-            alert("Veuillez remplir tous les champs");
-            return;
-        }
+        {/* EMAIL */}
+        <div className="flex flex-col">
+          <label className="font-semibold mb-2 text-gray-700">
+            Email
+          </label>
 
-        const data = {
-            email: email,
-            password: password
-        };
-       
-        try {
-            const response = await fetch(`${URL_FRONT}/api/auth/connexion`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-
-            const result = await response.json();
-            console.log(result);
-
-            if (response.ok) {
-                if (result.token) {
-                    localStorage.setItem("token", result.token);
-                }
-                alert(`Connexion réussie ${result.user.prenom} ${result.user.nom}` );
-                navigate('/');
-                
-            } else {
-                alert(result.message || "Identifiants incorrects");
-            }
-
-        } catch (error) {
-            console.error(error);
-            alert("Erreur serveur. Veuillez réessayer.");
-        }
-
-
-  }
-
-
-
-  return (
-      <div className="w-screen h-screen  flex items-center justify-center">
-
-        <div className="w-full max-w-xl p-5 bg-white">
-
-            <h1 className="text-center font-bold text-xl">Connexion</h1>
-
-            <form  onSubmit={Laconnexion} >
-                <div className="flex flex-col gap-2">
-                    <label >Email</label>
-                    <input
-                        className="border py-1 px-3 border-black"
-                        type="email" 
-                        placeholder="exemple@gmail.com"
-                        value = {email}
-                        onChange={ (e) => setEmail(e.target.value)}
-                         />
-                </div>
-                <div className="flex flex-col gap-2 mt-2">
-                    <label >Mot de passe</label>
-                    <input
-                        className="border py-1 px-3 border-black"
-                        type="password" 
-                        placeholder="Mot de passe"
-                        value = {password}
-                        onChange={ (e) => setPassword(e.target.value)} />
-                </div>
-
-                <button type="submit"  className="w-full bg-black text-white mt-10 py-2 mb-2">Se connecter</button>
-                <Link to="/inscription" className="text-red-600 font-bold underline">S'inscrire</Link>
-            </form>
-
+          <input
+            className="
+              border
+              rounded-xl
+              py-3
+              px-4
+              outline-none
+              focus:ring-2
+              focus:ring-blue-500
+              focus:border-transparent
+              transition
+            "
+            type="email"
+            placeholder="exemple@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
 
-    </div>
-  )
-}
+        {/* PASSWORD */}
+        <div className="flex flex-col">
+          <label className="font-semibold mb-2 text-gray-700">
+            Mot de passe
+          </label>
 
-export default Connexion
+          <input
+            className="
+              border
+              rounded-xl
+              py-3
+              px-4
+              outline-none
+              focus:ring-2
+              focus:ring-blue-500
+              focus:border-transparent
+              transition
+            "
+            type="password"
+            placeholder="Mot de passe"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        {/* BOUTON */}
+        <button
+          type="submit"
+          className="
+            w-full
+            bg-gradient-to-r
+            from-blue-600
+            to-purple-600
+            text-white
+            py-3
+            rounded-xl
+            font-bold
+            hover:scale-105
+            hover:shadow-lg
+            transition
+            duration-300
+          "
+        >
+          Se connecter
+        </button>
+
+        {/* INSCRIPTION */}
+        <div className="text-center">
+          <Link
+            to="/inscription"
+            className="
+              text-blue-600
+              hover:text-purple-600
+              font-semibold
+              transition
+            "
+          >
+            Créer un compte
+          </Link>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+)
