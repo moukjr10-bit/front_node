@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
-  const URL_FRONT = import.meta.env.VITE_URL_FRONT;
-
+const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
 
 const Connexion = () => {
-
   const [ email , setEmail ] = useState('');
   const [ password , setPassword ] = useState('');
   const navigate = useNavigate();
@@ -61,7 +59,7 @@ const Connexion = () => {
   return (
       <div className="w-screen h-screen  flex items-center justify-center">
 
-        <div className="w-full max-w-xl p-8 bg-white shadow-md rounded-xl">
+        <div className="w-full max-w-xl p-5 bg-white">
 
             <h1 className="text-center font-bold text-xl">Connexion</h1>
 
