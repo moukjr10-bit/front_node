@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <div className='w-full h-[10vh] flex items-center justify-between px-10 py-2 bg-neutral-400'>
-        <NavLink to="/">Logo</NavLink>
+        <NavLink to="/">Kante-DEV</NavLink>
          <div className="flex items-center gap-5">
             <NavLink to="/profil" className='text-white'>Profil</NavLink>
            
