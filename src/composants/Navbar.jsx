@@ -15,32 +15,35 @@ const Navbar = () => {
   return (
     <div className='w-full h-[10vh] flex items-center justify-between px-10 py-2 bg-neutral-400'>
 
-      {/* Logo */}
+      {/* Gauche */}
       <NavLink
         to="/"
-        className="text-xl font-bold text-white"
+        className="text-white font-bold text-xl"
       >
         KANTE-DEV
       </NavLink>
 
-      {/* Navigation */}
-      <div className="flex items-center gap-5">
+      {/* Milieu */}
+      <div className="flex items-center gap-10">
 
-        {/* AJOUT ACCUEIL */}
         <NavLink
           to="/"
-          className="text-white"
+          className="text-white font-semibold"
         >
           Accueil
         </NavLink>
 
-        {/* PROFIL */}
         <NavLink
           to="/profil"
-          className="text-white"
+          className="text-white font-semibold"
         >
           Profil
         </NavLink>
+
+      </div>
+
+      {/* Droite */}
+      <div className="flex items-center gap-3">
 
         {
           token ? (
@@ -51,23 +54,21 @@ const Navbar = () => {
               Se déconnecter
             </button>
           ) : (
-            <div className="flex items-center gap-2">
-
+            <>
               <NavLink
                 to="/connexion"
-                className="bg-yellow-600 text-white px-6 py-1 rounded font-bold hover:bg-yellow-700"
+                className="bg-yellow-600 text-white px-6 py-1 rounded font-bold"
               >
                 Connexion
               </NavLink>
 
               <NavLink
                 to="/inscription"
-                className="bg-green-600 text-white px-6 py-1 rounded font-bold hover:bg-green-700"
+                className="bg-green-600 text-white px-6 py-1 rounded font-bold"
               >
                 Inscription
               </NavLink>
-
-            </div>
+            </>
           )
         }
 
