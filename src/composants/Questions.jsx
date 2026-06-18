@@ -1,52 +1,50 @@
 import React from "react";
 import QuestionCard from "./QuestionCard";
-
-
 const Questions = () => {
   const questions = [
     {
       id: 1,
-      titre: "Comment créer une connexion entre React et Node.js ?",
+      titre: "Comment utiliser useEffect dans React pour récupérer des données ?",
       description:
-        "Je souhaite connecter mon frontend React avec mon backend Node.js et envoyer des données.",
-      heure: "08:30",
+        "Je souhaite comprendre comment appeler une API et afficher les données dans mon composant React.",
+      heure: "08:45",
       auteur: "Moussa Kanté",
     },
 
     {
       id: 2,
-      titre: "Pourquoi mon API retourne une erreur CORS ?",
+      titre: "Pourquoi mon serveur Express retourne une erreur 404 ?",
       description:
-        "Mon frontend React ne parvient pas à communiquer avec mon backend Express.",
-      heure: "10:15",
-      auteur: "Awa Diop",
+        "Toutes mes routes semblent correctes mais certaines requêtes ne fonctionnent toujours pas.",
+      heure: "10:10",
+      auteur: "Awa Ndiaye",
     },
 
     {
       id: 3,
-      titre: "Comment utiliser MongoDB avec Express ?",
+      titre: "Comment connecter Spring Boot à une base de données MySQL ?",
       description:
-        "Je souhaite enregistrer des utilisateurs dans MongoDB avec Node.js.",
-      heure: "11:20",
+        "Je cherche à configurer correctement la connexion entre Spring Boot et MySQL.",
+      heure: "11:35",
       auteur: "Ibrahima Fall",
     },
 
     {
       id: 4,
-      titre: "Comment protéger une route avec JWT ?",
+      titre: "Quelle est la différence entre let, const et var en JavaScript ?",
       description:
-        "Je veux sécuriser certaines pages après connexion utilisateur.",
-      heure: "14:00",
-      auteur: "Fatou Mbaye",
+        "Je veux mieux comprendre quand utiliser chaque déclaration dans mes projets JavaScript.",
+      heure: "14:55",
+      auteur: "Fatou Diop",
     },
 
     {
       id: 5,
-      titre: "Comment déployer une application MERN sur Render et Vercel ?",
+      titre: "Comment créer une authentification JWT avec Node.js ?",
       description:
-        "Je veux mettre mon backend sur Render et mon frontend sur Vercel.",
-      heure: "17:45",
-      auteur: "Ousmane Ndiaye",
+        "Je développe une API Express et je souhaite protéger les accès utilisateurs avec JWT.",
+      heure: "17:20",
+      auteur: "Cheikh Sow",
     },
   ];
 
