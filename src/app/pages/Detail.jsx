@@ -46,8 +46,14 @@ const Detail = () => {
     );
   }
 
+  const auteur =
+    question.auteur?.prenom && question.auteur?.nom
+      ? `${question.auteur.prenom} ${question.auteur.nom}`
+      : "Utilisateur inconnu";
+
   return (
     <div className="max-w-4xl mx-auto p-6">
+
       <div className="bg-white border rounded-lg p-6 shadow-sm">
         <h1 className="text-2xl font-bold">
           {question.titre}
@@ -57,9 +63,15 @@ const Detail = () => {
           {question.description}
         </p>
 
-        <span className="inline-block mt-4 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-md">
-          {question.tag}
-        </span>
+        <div className="flex justify-between items-center mt-5">
+          <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-md">
+            {question.tag}
+          </span>
+
+          <span className="text-sm text-gray-500">
+            Posée par {auteur}
+          </span>
+        </div>
       </div>
 
       <div className="mt-8">
@@ -77,11 +89,19 @@ const Detail = () => {
               key={index}
               className="bg-white border rounded-lg p-4 mb-3"
             >
-              <p>{reponse.text}</p>
+              <p className="text-gray-700">
+                {reponse.text}
+              </p>
+
+              <p className="text-sm text-gray-500 mt-3">
+                Réponse de{" "}
+                {reponse.user?.prenom} {reponse.user?.nom}
+              </p>
             </div>
           ))
         )}
       </div>
+
     </div>
   );
 };
