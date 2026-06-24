@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 
 const QuestionCard = ({ question }) => {
-  const auteur =
-    question.auteur?.prenom && question.auteur?.nom
-      ? `${question.auteur.prenom} ${question.auteur.nom}`
-      : "Utilisateur inconnu";
+  const auteur = question.auteur
+    ? `${question.auteur.prenom} ${question.auteur.nom}`
+    : "Auteur inconnu";
 
   const date = question.createdAt
     ? new Date(question.createdAt).toLocaleDateString("fr-FR")
@@ -15,55 +14,36 @@ const QuestionCard = ({ question }) => {
     : 0;
 
   return (
-    <div className="border border-gray-200 rounded-lg p-5 shadow-sm bg-white hover:shadow-md transition">
-      <div className="flex flex-col md:flex-row gap-5">
-
-        <div className="flex md:flex-col gap-4 text-sm text-gray-600 md:min-w-24">
-          <span>
-            <strong className="text-gray-900">
-              {question.vote || 0}
-            </strong>{" "}
-            votes
-          </span>
-
-          <span>
-            <strong className="text-gray-900">
-              {nombreReponses}
-            </strong>{" "}
-            réponses
-          </span>
-        </div>
-
-        <div className="flex-1">
-          <Link
-            to={`/question/${question._id}`}
-            className="text-xl font-semibold text-blue-600 hover:underline"
-          >
+    <div className="border border-gray-200 rounded-lg p-5 bg-white shadow-sm">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-semibold">
             {question.titre}
-          </Link>
+          </h2>
 
           <p className="text-gray-600 mt-2">
             {question.description}
           </p>
-
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mt-4">
-            <div>
-              <span className="inline-block bg-yellow-100 text-yellow-800 px-3 py-1 rounded-md text-sm font-medium">
-                {question.tag}
-              </span>
-            </div>
-
-            <div className="text-sm text-gray-500">
-              Posée par{" "}
-              <span className="font-semibold text-gray-700">
-                {auteur}
-              </span>{" "}
-              le {date}
-            </div>
-          </div>
         </div>
 
+        <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
+          {question.tag}
+        </span>
       </div>
+
+      <div className="flex flex-wrap gap-4 mt-5 pt-3 border-t text-sm text-gray-500">
+        <span>▲ {question.vote || 0} vote(s)</span>
+        <span>💬 {nombreReponses} réponse(s)</span>
+        <span>Par : {auteur}</span>
+        <span>{date}</span>
+      </div>
+
+      <Link
+        to={`/detail/${question._id}`}
+        className="inline-block mt-4 text-blue-600 font-bold hover:underline"
+      >
+        Voir le détail →
+      </Link>
     </div>
   );
 };
