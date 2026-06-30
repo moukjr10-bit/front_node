@@ -12,9 +12,11 @@ const Profil = () => {
 
   const recupererProfil = async () => {
 
-    const token = localStorage.getItem("token");
-
     try {
+
+      const token = localStorage.getItem("token");
+
+      console.log(token);
 
       const response = await fetch(
         "http://localhost:3000/api/auth/profil",
@@ -26,6 +28,8 @@ const Profil = () => {
       );
 
       const data = await response.json();
+
+      console.log(data);
 
       if (response.ok) {
 
@@ -49,7 +53,7 @@ const Profil = () => {
 
     return (
 
-      <div className="flex justify-center mt-20">
+      <div className="flex justify-center items-center h-screen">
 
         Chargement...
 
