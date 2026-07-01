@@ -13,6 +13,7 @@ import Profil from "./app/pages/Profil";
 import QuestionForm from "./app/pages/QuestionForm";
 import Detail from "./app/pages/Detail";
 
+
 const App = () => {
 
   const router = createBrowserRouter([

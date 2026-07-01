@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+ const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
 const QuestionForm = () => {
   const navigate = useNavigate();
@@ -7,19 +8,30 @@ const QuestionForm = () => {
   const [titre, setTitre] = useState("");
   const [description, setDescription] = useState("");
   const [tag, setTag] = useState("");
-
-  const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(false);
 
   const AjouterQuestion = async (e) => {
     e.preventDefault();
 
-    if (!titre || !description || !tag) {
+    const token = localStorage.getItem("token");
+
+    console.log("Token :", token);
+
+    if (!token) {
+      alert("Vous devez vous connecter avant de publier une question.");
+      navigate("/connexion");
+      return;
+    }
+
+    if (!titre.trim() || !description.trim() || !tag.trim()) {
       alert("Veuillez remplir tous les champs.");
       return;
     }
 
+    setLoading(true);
+
     try {
-      const response = await fetch("http://localhost:3000/api/question", {
+      const response = await fetch(`${URL_FRONT}/api/question`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,28 +46,32 @@ const QuestionForm = () => {
 
       const data = await response.json();
 
-      alert(data.message);
+      console.log("Status :", response.status);
+      console.log("Réponse Backend :", data);
 
       if (response.ok) {
+        alert(data.message || "Question ajoutée avec succès.");
+
         setTitre("");
         setDescription("");
         setTag("");
 
         navigate("/");
+      } else {
+        alert(data.message || "Erreur lors de l'ajout de la question.");
       }
     } catch (error) {
-      console.log(error);
-      alert("Erreur de connexion avec le serveur.");
+      console.error("Erreur :", error);
+      alert("Impossible de contacter le serveur.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 py-10">
-
       <div className="max-w-4xl mx-auto">
-
         <div className="bg-white rounded-2xl shadow-xl p-10">
-
           <h1 className="text-4xl font-bold text-blue-700 text-center">
             Poser une question
           </h1>
@@ -64,10 +80,7 @@ const QuestionForm = () => {
             Décrivez votre problème le plus précisément possible.
           </p>
 
-          <form
-            onSubmit={AjouterQuestion}
-            className="mt-10 space-y-6"
-          >
+          <form onSubmit={AjouterQuestion} className="mt-10 space-y-6">
 
             <div>
               <label className="block font-semibold mb-2">
@@ -94,7 +107,7 @@ const QuestionForm = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Expliquez votre problème..."
                 className="w-full border border-gray-300 rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none"
-              ></textarea>
+              />
             </div>
 
             <div>
@@ -113,17 +126,19 @@ const QuestionForm = () => {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold py-4 rounded-xl transition"
+              disabled={loading}
+              className={`w-full text-white text-lg font-bold py-4 rounded-xl transition ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
             >
-              Publier la question
+              {loading ? "Publication..." : "Publier la question"}
             </button>
 
           </form>
-
         </div>
-
       </div>
-
     </div>
   );
 };

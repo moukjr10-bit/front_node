@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import QuestionCard from "./QuestionCard";
+const URL_FRONT = import.meta.env.VITE_URL_FRONT;
 
 const Questions = () => {
   const [questions, setQuestions] = useState([]);
@@ -8,7 +9,7 @@ const Questions = () => {
 
   const recupererQuestions = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/question");
+      const response = await fetch(`${URL_FRONT}/api/question`);
       const result = await response.json();
 
       if (response.ok) {
